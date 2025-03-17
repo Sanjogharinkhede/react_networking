@@ -1,12 +1,91 @@
-# React + Vite
+# React Networking Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application built with React and Flask, featuring a modern UI and MongoDB integration.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+my-web-app/
+├── frontend/
+│   ├── src/
+│   │   ├── components/     # Reusable React components
+│   │   ├── constants/      # Application constants and configurations
+│   │   ├── utils/         # Utility functions and helpers
+│   │   ├── services/      # API service integrations
+│   │   ├── pages/         # Page components
+│   │   └── assets/        # Static assets (images, styles)
+│   └── public/            # Public static files
+└── backend/
+    ├── app.py            # Flask application entry point
+    ├── requirements.txt  # Python dependencies
+    └── .env             # Environment variables
+```
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## Setup
+
+### Frontend Setup
+
+1. Install dependencies:
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+2. Start development server:
+   ```bash
+   npm run dev
+   ```
+
+### Backend Setup
+
+1. Create virtual environment:
+   ```bash
+   cd backend
+   python -m venv .venv
+   source .venv/bin/activate  
+   .venv\Scripts\activate
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Start Flask server:
+   ```bash
+   python app.py
+   ```
+
+## Dependencies
+
+### Frontend
+- React 19
+- Bootstrap
+- Font Awesome
+- Highlight.js
+- Fancybox
+
+### Backend
+- Flask
+- Flask-PyMongo
+- Python-dotenv
+- Flask-CORS
+
+
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+
+## Author
+
+Sanjog Harinkhede

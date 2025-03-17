@@ -1,4 +1,4 @@
-function Content() {
+function BaseContent(props) {
   return (
     <>
       <div className="content">
@@ -9,4 +9,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default BaseContent;
