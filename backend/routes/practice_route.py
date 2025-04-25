@@ -4,7 +4,7 @@ import aiofiles
 
 
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(prefix="/myPractice", tags=["MyPractice"])
 
 
 

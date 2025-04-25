@@ -4,13 +4,14 @@ import os
 import uvicorn
 from typing import List, Tuple, Dict   
 from functools import reduce
-from backend.routes import practice_route
+from backend.routes import practice_route,book_route
  
 load_dotenv()  # Loads variables from .env
 
 app = FastAPI()
 
 app.include_router(practice_route.router)
+app.include_router(book_route.router)
 
 
 @app.get("/")
