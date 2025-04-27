@@ -1,10 +1,10 @@
-from fastapi import FastAPI,Query,Path
+from fastapi import FastAPI
 from dotenv import load_dotenv
 import os
 import uvicorn
 from typing import List, Tuple, Dict   
 from functools import reduce
-from backend.routes import practice_route,book_route
+from routes import practice_route,book_route
  
 load_dotenv()  # Loads variables from .env
 
@@ -50,3 +50,4 @@ def home():
 if __name__ == '__main__':      
     # app.run(debug=False, port=5000)
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)   
+    # app = FastAPI(openapi_url=None, docs_url=None, redoc_url=None)
