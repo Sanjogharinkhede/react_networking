@@ -3,18 +3,21 @@ Models Are Used For SQLAlchemy which is an ORM and used for DB connection compar
 pydantic which is more used for validations. 
 
 """
+from configs.db import Base
+from sqlalchemy import Column, Integer,String,Boolean,Date,DateTime
+from datetime import datetime
+from sqlalchemy.sql import func
 
-
-
-from pydantic import BaseModel,Field
-from typing import List,  Dict, Tuple
-
-class User(BaseModel):
-    id: int 
-    name: str=Field(None,title= "Full name of user",min_length=2,max_length=10)
-    email: str
-    phones: List[str]=[]
-    password: str
+class User(Base):
+    __tablename__= "users"
+    
+    id=Column(Integer,primary_key=True,autoincrement=True,index=True)
+    name=Column(String,index=True)
+    email=Column(String,unique=True,index=True)
+    phones=Column(String,index=True)
+    password=Column(String)
+    created_at = Column(DateTime(timezone=True), server_default=func.now()) #SQL server automatically sets it to current time.
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now()) #Updates automatically when the record changes.
     
     
     

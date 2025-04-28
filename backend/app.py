@@ -4,14 +4,20 @@ import os
 import uvicorn
 from typing import List, Tuple, Dict   
 from functools import reduce
-from routes import practice_route,book_route
- 
+from routes import practice_route,book_route,todo_route,gemini_route
+import models
+from configs.db import engine
+
 load_dotenv()  # Loads variables from .env
 
 app = FastAPI()
 
+models.Base.metadata.create_all(bind=engine)
+
 app.include_router(practice_route.router)
 app.include_router(book_route.router)
+app.include_router(todo_route.router)
+app.include_router(gemini_route.router)
 
 
 @app.get("/")
@@ -23,6 +29,24 @@ def home():
         return [a-b,a,a+b]
     
     return {"message": "We are starting with Fast API", "env": os.getenv("APP_ENV"), "function with type hint" : prac1  (1,2)}
+
+
+if __name__ == '__main__':      
+    # app.run(debug=False, port=5000)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)   
+    # app = FastAPI(openapi_url=None, docs_url=None, redoc_url=None)
+
+
+
+
+
+
+
+
+
+
+
+# -----------------------------------------------------------------------------------------------------#
 
 # @app.get("/{name}/{age}")
 # async def prac2(name : str, age:int)->str :
@@ -46,8 +70,6 @@ def home():
 # ):
 #     return {"topic": topic, "level": level,"age":age}
 
+# -----------------------------------------------------------------------------------------------------#
 
-if __name__ == '__main__':      
-    # app.run(debug=False, port=5000)
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)   
-    # app = FastAPI(openapi_url=None, docs_url=None, redoc_url=None)
+
