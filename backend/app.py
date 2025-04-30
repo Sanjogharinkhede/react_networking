@@ -4,7 +4,7 @@ import os
 import uvicorn
 from typing import List, Tuple, Dict   
 from functools import reduce
-from routes import practice_route,book_route,todo_route,gemini_route
+from routes import all_routes
 import models
 from configs.db import engine
 
@@ -14,10 +14,9 @@ app = FastAPI()
 
 models.Base.metadata.create_all(bind=engine)
 
-app.include_router(practice_route.router)
-app.include_router(book_route.router)
-app.include_router(todo_route.router)
-app.include_router(gemini_route.router)
+
+for route in all_routes:
+    app.include_router(route)
 
 
 @app.get("/")
