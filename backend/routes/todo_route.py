@@ -6,7 +6,7 @@ from typing import Annotated
 from fastapi import Depends
 from configs.db import get_db
 from sqlalchemy.orm import Session
-from schemas import Todo
+from schemas import Todo as TodoRequest
 
 
 router= APIRouter(prefix="/todo",tags=["Todo"])
@@ -20,5 +20,5 @@ async def get_task_by_id(db:db_depends,id:int=Path(gt=0)):
     return todo_service.get_todo_by_id(db,id)
 
 @router.post("/add",status_code=status.HTTP_201_CREATED)
-async def add_a_task(db:db_depends,todo:Todo=Body()):
+async def add_a_task(db:db_depends,todo:TodoRequest=Body()):
     return todo_service.insert_into_todo(db,todo)
