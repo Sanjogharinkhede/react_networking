@@ -1,4 +1,4 @@
-from schemas.user import User
+from schemas.user_request import User
 from fastapi import APIRouter, HTTPException,Body,Path,Query,responses,UploadFile, File
 import aiofiles
 

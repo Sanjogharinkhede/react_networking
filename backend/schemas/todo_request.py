@@ -14,6 +14,7 @@ class Todo(BaseModel):
     completed:bool
     start_date:date
     end_date:datetime
+    user_id:int
     created_at :datetime
     updated_at:datetime
      #it will be an example shown in swagger doc for user
@@ -26,6 +27,7 @@ class Todo(BaseModel):
   "completed": False,
   "start_date": "2025-04-29",
   "end_date": "2025-05-01T18:00:00",
+  "user_id":1,
   "created_at": "2025-04-29T12:00:00",
   "updated_at": "2025-04-29T14:30:00"
 }

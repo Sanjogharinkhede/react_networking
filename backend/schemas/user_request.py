@@ -7,10 +7,10 @@ pydantic which is more used for validations.
 from pydantic import BaseModel,Field,EmailStr
 from typing import List,  Dict, Tuple
 class User(BaseModel):
-    id: int 
     name: str=Field(None,title= "Full name of user",min_length=2,max_length=10)
     email: EmailStr
     phones: List[str]=[]
     password: str
-    
+    role:str
+    is_active:bool
     
