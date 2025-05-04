@@ -1,11 +1,13 @@
-from fastapi import APIRouter,Body, Depends,HTTPException
-from fastapi.security import OAuth2PasswordRequestForm
-from configs.db import get_db
-from schemas import User as UserRequest
-from services import user_service
-from starlette import status
-from sqlalchemy.orm import Session
 from typing import Annotated
+
+from fastapi import APIRouter, Body, Depends
+from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy.orm import Session
+from starlette import status
+
+from configs.db import get_db
+from schemas import Token, User as UserRequest
+from services import user_service
 
 router = APIRouter(prefix="/auth",tags=["User Authentication"])
 db_depends=Annotated[Session,Depends(get_db)]
@@ -15,6 +17,6 @@ db_depends=Annotated[Session,Depends(get_db)]
 async def create_new_user(db:db_depends,user:UserRequest = Body()):
         return user_service.create_user(db,user)
         
-@router.post("/login",status_code=status.HTTP_200_OK)
+@router.post("/login",status_code=status.HTTP_200_OK,response_model=Token)
 async def login_for_access_token(form_data:Annotated[OAuth2PasswordRequestForm,Depends()],db:db_depends):
         return user_service.get_token(form_data,db)

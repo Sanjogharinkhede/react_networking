@@ -1,12 +1,14 @@
-fastapi      # Latest stable FastAPI (Pydantic v2+ compatible)
-pydantic          # Pydantic v2 (works with FastAPI >=0.100)
-uvicorn[standard]    # ASGI server with full support
+fastapi~=0.115.12
+pydantic~=2.11.3
+starlette~=0.46.2
+uvicorn[standard]~=0.34.2
 SQLAlchemy==2.0.40
 # Auth & Security
-passlib
+passlib~=1.7.4
 bcrypt==4.0.1                # Secure password hashing
 cryptography==42.0.5         # Underlying library for SSL, bcrypt, etc.
-
+python-jose[cryptography]~=3.4.0
+passlib[bcrypt]
 
 google-genai
 
@@ -30,3 +32,4 @@ httpx==0.27.0                # Async HTTP requests
 
 # Optional - CORS, static files, etc.
 itsdangerous==2.2.0
+

@@ -1,3 +1,4 @@
+from datetime import timedelta
 from schemas import User as UserRequest
 from models import User 
 
@@ -7,6 +8,7 @@ from fastapi import Depends ,HTTPException
 from configs.db import get_db
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm
+from utils.auth_handler import create_access_token 
 
 
 bcrypt_context=CryptContext(schemes=['bcrypt'],deprecated='auto')
@@ -24,13 +26,14 @@ def create_user(db,user:UserRequest):
     
     
 def get_token(form_data,db):
-    is_a_user=authenticate_user(db,form_data.username,form_data.password)
-    if not is_a_user:
-        return {"status":False,"msg":"Failed Authentication", "form_data":form_data,"token":"token"}
-    return {"status":True, "form_data":form_data,"token":"token"}
+    user:User=authenticate_user(db,form_data.username,form_data.password)
+    if not user:
+        return {"status":False,"msg":"Failed Authentication"}
+    token=create_access_token(user.email,user.id,timedelta(minutes=30))
+    return {"status":True, "form_data":form_data,"access_token":token,"token_type":"bearer"}
 
-def authenticate_user(db,email, password)->bool:
+def authenticate_user(db,email, password)->User:
     user =db.query(User).filter(email==User.email).first()
-    if not user :
-        return False    
-    return bcrypt_context.verify(password,user.password)
+    if not user or not bcrypt_context.verify(password,user.password):
+        return None
+    return user
