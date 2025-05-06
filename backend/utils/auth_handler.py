@@ -18,10 +18,9 @@ def create_access_token(username:str, user_id:int, expire_delta:timedelta):
         'id':user_id,
         'exp':datetime.now(timezone.utc)+expire_delta
     }
-    
     return jwt.encode(encode,os.getenv("SECRET_KEY"),algorithm=os.getenv("ALGORITHM"))
 
-def get_user_with_jwt(token:Annotated[str,Depends(oauth2_bearer)]):
+def get__current_user_with_jwt(token:Annotated[str,Depends(oauth2_bearer)]):
     try:
         payload =jwt.decode(token,os.getenv("SECRET_KEY"),algorithms=[os.getenv("ALGORITHM")])
         email :str=payload.get('sub')

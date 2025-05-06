@@ -32,7 +32,7 @@ def home():
 
 if __name__ == '__main__':      
     # app.run(debug=False, port=5000)
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)   
+    uvicorn.run("main:app", host="127.0.0.1", port=7000, reload=True)   
     # app = FastAPI(openapi_url=None, docs_url=None, redoc_url=None)
 
 
