@@ -14,7 +14,6 @@ app = FastAPI()
 
 models.Base.metadata.create_all(bind=engine)
 
-
 for route in all_routes:
     app.include_router(route)
 
@@ -32,7 +31,9 @@ def home():
 
 if __name__ == '__main__':      
     # app.run(debug=False, port=5000)
-    uvicorn.run("main:app", host="127.0.0.1", port=7000, reload=True)   
+    host = os.getenv("HOST", "127.0.0.1")
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("app:app", host=host, port=port, reload=True)
     # app = FastAPI(openapi_url=None, docs_url=None, redoc_url=None)
 
 
