@@ -39,3 +39,22 @@ def authenticate_user(db,email, password)-> User| None:
     if not user or not bcrypt_context.verify(password,user.password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Password not matched for user")
     return user
+
+def get_user_details(user,db):
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthenticated user")
+    user_model = db.query(User).filter(user.get("payload")["id"] == User.id).first()
+    if not user_model:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unable to find details of user")
+    return user_model
+
+def change_password(db,email,old_password,new_password):
+    user = db.query(User).filter(email == User.email).first()
+    print(user.name,old_password,user.password)
+    if not user or not bcrypt_context.verify(old_password,user.password):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Email or Password not matched for user")
+    user.password=bcrypt_context.hash(new_password)
+    db.commit()
+    print(user)
+    db.refresh(user)
+    return True
