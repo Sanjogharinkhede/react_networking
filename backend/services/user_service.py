@@ -31,7 +31,7 @@ def get_token(form_data,db):
     user:User=authenticate_user(db,form_data.username,form_data.password)
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="No user found with given credentials.")
-    token=create_access_token(user.email,user.id,timedelta(minutes=30))
+    token=create_access_token(user.email,user.id,user.role,timedelta(minutes=30))
     return {"status":True, "form_data":form_data,"access_token":token,"token_type":"bearer"}
 
 def authenticate_user(db,email, password)-> User| None:

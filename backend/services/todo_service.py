@@ -25,4 +25,21 @@ def insert_into_todo(user,db,todo_data:TodoRequest):
     db.add(new_todo_model)
     db.commit()
     db.refresh(new_todo_model)
-    
+    return new_todo_model
+def update_todo_by_id(user,db,todo_id,updated_todo):
+    if  not user :
+        raise HTTPException(status_code=401, detail="User is not logged in.")
+    print(user.get("role").casefold())
+    if user.get("role").casefold()!="admin":
+        raise HTTPException(status_code=401, detail="Only admin can access.")
+
+    saved_todo=db.query(Todo).filter(Todo.id==todo_id).first()
+    if not saved_todo:
+        raise HTTPException(status_code=401, detail="Unable to found todo.")
+    for key, value in updated_todo.model_dump().items():
+        if key not in ["id","user_id"]:
+            setattr(saved_todo, key, value)
+    db.commit()
+    db.refresh(saved_todo)
+    return saved_todo
+
