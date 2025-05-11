@@ -21,15 +21,24 @@ config = context.config
 
 # set sql  url instead of setting in .ini file
 user = os.getenv("DB_USER")
-# password = quote_plus(os.getenv("DB_PASSWORD"))
 password = quote_plus(os.getenv("DB_PASSWORD")).replace("%", "%%")
 host = os.getenv("DB_HOST")
 port = os.getenv("DB_PORT")
 db = os.getenv("DB_NAME")
 
+my_user = os.getenv("MYSQL_USER")
+my_password = quote_plus(os.getenv("MYSQL_PASSWORD")).replace("%", "%%")
+my_host = os.getenv("MYSQL_HOST")
+my_port = os.getenv("MYSQL_PORT")
+my_db = os.getenv("MYSQL_NAME")
+
+
 db_url = f"postgresql://{user}:{password}@{host}:{port}/{db}"
-print(db_url)
-config.set_main_option("sqlalchemy.url", db_url)
+mysql_url = f"mysql+pymysql://{my_user}:{my_password}@{my_host}:{my_port}/{my_db}"
+
+# print(db_url)
+# config.set_main_option("sqlalchemy.url", db_url)
+config.set_main_option("sqlalchemy.url", mysql_url)
 
 
 # Interpret the config file for Python logging.
