@@ -7,8 +7,8 @@ class Todo(Base):
     __tablename__= "todos"
     
     id=Column(Integer, primary_key=True,autoincrement=True,index=True)
-    title=Column(String)
-    desc=Column(String)
+    title=Column(String(255))
+    desc=Column(String(255))
     priority=Column(Integer)
     completed=Column(Boolean,default=False)
     start_date=Column(Date,default=datetime.utcnow)

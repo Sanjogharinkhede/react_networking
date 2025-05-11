@@ -1,8 +1,19 @@
+
 fastapi~=0.115.12
-pydantic~=2.11.3
-starlette~=0.46.2
 uvicorn[standard]~=0.34.2
+starlette~=0.46.2 #for status code and final Status
+
+# Data validation & uploads
+pydantic~=2.11.3 # uses for validation and creating schemas
+email-validator==2.2.0       # Email validation (works with Pydantic)
+python-multipart==0.0.9      # File upload parsing for FastAPI and JWT
+
+#ORM and Migration Tool
 SQLAlchemy==2.0.40
+alembic==1.15.2
+
+
+
 # Auth & Security
 passlib~=1.7.4
 bcrypt==4.0.1                # Secure password hashing
@@ -10,14 +21,17 @@ cryptography==42.0.5         # Underlying library for SSL, bcrypt, etc.
 python-jose[cryptography]~=3.4.0
 passlib[bcrypt]
 
+
+#GEMINI
 google-genai
 
 # MongoDB
 pymongo==4.6.3               # MongoDB driver
-pymysql
-# Data validation & uploads
-email-validator==2.2.0       # Email validation (works with Pydantic)
-python-multipart==0.0.9      # File upload parsing for FastAPI and JWT 
+pymysql                      # mysql
+psycopg-binary               # postgres
+psycopg2-binary              # postgres
+
+
 
 # Environment variables
 python-dotenv==1.0.1         # Loads .env configs
