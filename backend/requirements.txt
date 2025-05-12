@@ -42,6 +42,8 @@ aiofiles==23.2.1             # Required for `UploadFile`
 # HTTP clients
 httpx==0.27.0                # Async HTTP requests
 
+#Testing Library
+pytest
 
 
 # Optional - CORS, static files, etc.

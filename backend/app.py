@@ -1,3 +1,4 @@
+from alembic.util import status
 from fastapi import FastAPI
 from dotenv import load_dotenv
 import os
@@ -7,7 +8,7 @@ from functools import reduce
 from routes import all_routes
 import models
 from configs.db import engine
-
+from starlette import status
 load_dotenv()  # Loads variables from .env
 
 app = FastAPI()
@@ -18,7 +19,7 @@ for route in all_routes:
     app.include_router(route)
 
 
-@app.get("/")
+@app.get("/",status_code=status.HTTP_200_OK)
 def home():
     def prac1(a: int , b: float)->List :
         """
@@ -26,7 +27,7 @@ def home():
         """
         return [a-b,a,a+b]
     
-    return {"message": "We are starting with Fast API", "env": os.getenv("APP_ENV"), "function with type hint" : prac1  (1,2)}
+    return {"status":"True","message": "We are starting with Fast API", "env": os.getenv("APP_ENV"), "function with type hint" : prac1  (1,2)}
 
 
 if __name__ == '__main__':      
