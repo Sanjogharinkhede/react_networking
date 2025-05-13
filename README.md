@@ -16,9 +16,29 @@ my-web-app/
 │   │   └── assets/        # Static assets (images, styles)
 │   └── public/            # Public static files
 └── backend/
-    ├── app.py            # Flask application entry point
-    ├── requirements.txt  # Python dependencies
-    └── .env             # Environment variables
+|  ├── alembic/               # Alembic migrations
+|  ├── configs/               # DB configs, environment configs
+|  ├── models/                # SQLAlchemy models
+|  ├── routes/                # FastAPI routers
+|  ├── schemas/               # Pydantic schemas
+|  ├── services/              # Business logic
+|  ├── utils/                 # Auth, helpers
+|  ├── test/                  # test folder 
+|  ├── app.py                 # Entry point
+|  ├── .env                   # Environment secrets
+|  └── alembic.ini
+
+Testing API and functions
+test/
+├── __init__.py
+├── conftest.py                  # Shared fixtures (like DB session, client)
+├── test_main.py                 # General app health check
+├── routes/
+│   ├── __init__.py
+│   └── test_todo_routes.py      # Test `/todo` endpoints
+├── services/
+│   └── test_todo_service.py     # Optional: test services directly
+
 ```
 
 ## Features
@@ -55,7 +75,7 @@ my-web-app/
    pip install -r requirements.txt
    ```
 
-3. Start Flask server:
+3. Start FastAPI(uvicorn) server:
    ```bash
    python app.py
    ```
@@ -70,10 +90,10 @@ my-web-app/
 - Fancybox
 
 ### Backend
-- Flask
-- Flask-PyMongo
-- Python-dotenv
-- Flask-CORS
+- FastAPI
+- MYSQL and PostgreSQL
+- Starlettte
+- pytest
 
 
 
