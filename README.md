@@ -92,7 +92,8 @@ test/
 ### Backend
 - FastAPI
 - MYSQL and PostgreSQL
-- Starlettte
+- ALembic,Pydantic,Starlettte
+- JWT Authorization and authentication
 - pytest
 
 
