@@ -1,6 +1,6 @@
 # React Networking Project
 
-A web application built with React and Flask, featuring a modern UI and MongoDB integration.
+A web application built with React and FastAPI, featuring a modern UI and Database integration.
 
 ## Project Structure
 
